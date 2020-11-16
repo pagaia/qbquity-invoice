@@ -2,6 +2,9 @@
   "name": "qbquity-invoice",
   "version": "0.1.0",
   "private": true,
+  "description": "Front-end for QBQUITY Invoice",
+  "author": "pagaia - QBQUITY sprl",
+  "license": "MIT",
   "dependencies": {
     "@react-pdf/renderer": "^1.6.12",
     "@testing-library/jest-dom": "^5.11.4",
