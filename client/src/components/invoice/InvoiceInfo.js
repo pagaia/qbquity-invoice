@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import View from "./primitives/View";
-import LabelValue from "./LabelValue";
+import View from "primitives/View";
+import LabelValue from "invoice/LabelValue";
 
 const InvoiceInfo = ({ className, data }) => {
   if (!data) {

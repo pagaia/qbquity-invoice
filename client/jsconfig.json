@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "invoice": ["src/components/invoice"],
+      "primitives": ["src/components/primitives"]
+    }
+  }
+}

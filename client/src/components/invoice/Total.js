@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TotalRow from "./TotalRow";
+import TotalRow from "invoice/TotalRow";
 
 const Total = ({ data }) => {
   if (!data) {

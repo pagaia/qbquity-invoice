@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Text from "./primitives/Text";
-import View from "./primitives/View";
+import Text from "primitives/Text";
+import View from "primitives/View";
 
 const ProductHeader = ({ data }) => {
   if (!data) {

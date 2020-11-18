@@ -1,17 +1,17 @@
 import React from "react";
-import Document from "./primitives/Document";
-import Page from "./primitives/Page";
-import Text from "./primitives/Text";
-import View from "./primitives/View";
+import Document from "primitives/Document";
+import Page from "primitives/Page";
+import Text from "primitives/Text";
+import View from "primitives/View";
 import { StyleSheet, Font } from "@react-pdf/renderer";
-import Company from "./Company";
-import { template } from "../data/template";
-import InvoiceInfo from "./InvoiceInfo";
-import ProductHeader from "./ProductHeader";
-import ProductRow from "./ProductRow";
-import Total from "./Total";
-import BankInfo from "./BankInfo";
-import { styles as myStyles } from "../styles/styles";
+import Company from "invoice/Company";
+import { template } from "data/template";
+import InvoiceInfo from "invoice/InvoiceInfo";
+import ProductHeader from "invoice/ProductHeader";
+import ProductRow from "invoice/ProductRow";
+import Total from "invoice/Total";
+import BankInfo from "invoice/BankInfo";
+import { styles as myStyles } from "styles/styles";
 
 Font.register({
   family: "Crimson Text",

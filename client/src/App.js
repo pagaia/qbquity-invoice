@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { PDFViewer } from "@react-pdf/renderer";
-import Invoice from "./components/Invoice";
-import { template } from "./data/template";
+import Invoice from "invoice/Invoice";
+import { template } from "data/template";
 
 
 function App() {

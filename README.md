@@ -11,7 +11,7 @@ The Web API to store the invoce is done with fastify and the data is stored into
 To start the client in dev mode run
 
 ```bash
-yarn run start
+cd client && yarn run start
 ```
 
 ## Start Server

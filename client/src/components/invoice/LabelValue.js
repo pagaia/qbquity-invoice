@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
-import Text from "./primitives/Text";
-import View from "./primitives/View";
+import Text from "primitives/Text";
+import View from "primitives/View";
 
 const LabelValue = ({ label, value }) => {
   return (
