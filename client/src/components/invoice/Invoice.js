@@ -12,6 +12,7 @@ import ProductRow from "invoice/ProductRow";
 import Total from "invoice/Total";
 import BankInfo from "invoice/BankInfo";
 import { styles as myStyles } from "styles/styles";
+import { calTotal } from "../../utility/utilityFunctions";
 
 Font.register({
   family: "Crimson Text",
@@ -33,19 +34,6 @@ const styles = StyleSheet.create(myStyles);
 
 const data = template;
 
-const calTotal = (products) => {
-  const reducer = (accumulator, currentValue) =>
-    accumulator +
-    parseFloat(currentValue.quantity) * parseFloat(currentValue.unitPrice);
-
-  const subTotal = parseFloat(products.reduce(reducer, 0).toFixed(2));
-  const tax = parseFloat(
-    ((subTotal * parseFloat(data.total.taxNumber)) / 100).toFixed(2)
-  );
-  const total = parseFloat((parseFloat(subTotal) + parseFloat(tax)).toFixed(2));
-
-  return { subTotal, tax, total };
-};
 
 // Create Invoice Component
 const Invoice = (props) => {
@@ -66,7 +54,7 @@ const Invoice = (props) => {
           <ProductRow data={row} key={idx} />
         ))}
 
-        <Total data={{ ...data.total, ...calTotal(data.productRows) }} />
+        <Total data={{ ...data.total, ...calTotal(data.productRows, data.total.taxNumber) }} />
 
         <View className="term">
           <Text>{data.termLabel}</Text>

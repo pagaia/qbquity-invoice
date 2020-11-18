@@ -14,6 +14,10 @@ To start the client in dev mode run
 cd client && yarn run start
 ```
 
+## Installation server
+
+In order to install the server you need to have mongoDB installed and running
+
 ## Start Server
 
 To start the server in dev mode run
