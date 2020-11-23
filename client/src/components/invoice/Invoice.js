@@ -36,7 +36,7 @@ const data = template;
 
 
 // Create Invoice Component
-const Invoice = (props) => {
+const Invoice = ({data}) => {
   console.log({ styles });
 
   return (
@@ -54,7 +54,7 @@ const Invoice = (props) => {
           <ProductRow data={row} key={idx} />
         ))}
 
-        <Total data={{ ...data.total, ...calTotal(data.productRows, data.total.taxNumber) }} />
+        <Total data={{ ...data.total, ...calTotal(data) }} />
 
         <View className="term">
           <Text>{data.termLabel}</Text>

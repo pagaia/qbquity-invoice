@@ -1,4 +1,5 @@
 const routes = require("./routes");
+const MONGODB_CONF = require("./config/config");
 
 // Import Swagger Options
 const swagger = require("./config/swagger");
@@ -25,7 +26,7 @@ const mongoose = require("mongoose");
 
 // Connect to DB
 mongoose
-  .connect("mongodb://localhost/qbquity-invoice")
+  .connect(MONGODB_CONF.url)
   .then(() => console.log("MongoDB connected…"))
   .catch((err) => console.log(err));
 

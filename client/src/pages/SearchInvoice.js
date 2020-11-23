@@ -1,15 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Container from "@material-ui/core/Container";
-import Header from "components/Header";
-import Footer from "components/Footer";
 import InvoiceTable from "pages/InvoiceTable";
-import Typography from '@material-ui/core/Typography'
+import Typography from "@material-ui/core/Typography";
+import { Button} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -21,21 +23,24 @@ const sections = [
 
 export default function Searchinvoice() {
   const classes = useStyles();
+  const history = useHistory();
+
+  const createNewInvoice = () => {
+    history.push("/newInvoice");
+  };
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <Header title="QBQUITY - invoice" sections={sections} />
-        <main>
-          <Typography variant="h1">Search your invoice</Typography>
-          <InvoiceTable />
-        </main>
-      </Container>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
+      <Typography variant="h1">Search your invoice</Typography>
+      <InvoiceTable />
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={createNewInvoice}
+      >
+        Add Invoice
+      </Button>
     </React.Fragment>
   );
 }

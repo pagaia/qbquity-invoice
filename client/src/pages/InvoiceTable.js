@@ -9,31 +9,29 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import { calTotal } from "../utility/utilityFunctions";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import DeleteInvoice from "components/DeleteInvoice";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
-});
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+  actionLink: {
+    marginLeft: theme.spacing(1),
+  },
+}));
 
 export default function ManagementInvoice() {
   const classes = useStyles();
   const [invoices, setInvoices] = useState([]);
+  const history = useHistory();
 
-  const getInvoice = async () => {
+  const getInvoiceList = async () => {
     // Make a GET request
     let res = await axios.get("/api/invoices");
     let { data } = res;
@@ -42,17 +40,26 @@ export default function ManagementInvoice() {
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    getInvoice();
+    getInvoiceList();
   }, []);
+
+  const viewInvoice = (url) => {
+    history.push(url);
+  };
+
+  const editInvoice = (url) => {
+    history.push(url);
+  };
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table className={classes.table} aria-label="Invoice table">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell align="right">Customer</TableCell>
             <TableCell align="right">Total</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -66,7 +73,23 @@ export default function ManagementInvoice() {
                 {calTotal(row).total} {row.total.currency}
               </TableCell>
               <TableCell align="right">
-                <Link to="/newInvoice">New Invoice</Link>
+                <Tooltip title="View invoice">
+                  <IconButton
+                    aria-label="view invoice"
+                    onClick={() => viewInvoice(`/invoice/view/pdf/${row._id}`)}
+                  >
+                    <VisibilityIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={`Edit invoice ${row.invoice.title}`}>
+                  <IconButton
+                    aria-label="Create new invoice"
+                    onClick={() => editInvoice(`/invoice/edit/${row._id}`)}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+                <DeleteInvoice invoice={row} refresh={getInvoiceList} />
               </TableCell>
             </TableRow>
           ))}

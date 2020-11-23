@@ -16,7 +16,8 @@ cd client && yarn run start
 
 ## Installation server
 
-In order to install the server you need to have mongoDB installed and running
+In order to install the server you need to have mongoDB installed and running.
+Edit connection url into config/config.js
 
 ## Start Server
 

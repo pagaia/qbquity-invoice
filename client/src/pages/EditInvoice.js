@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -6,7 +6,9 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import InvoiceForm from "components/InvoiceForm";
 import { Link as LinkRouter } from "react-router-dom";
-
+import Axios from "axios";
+import { useParams } from "react-router-dom";
+import Loading from "components/Loading";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -45,25 +47,48 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function NewInvoice() {
-  const classes = useStyles();
 
+export default function EditInvoice() {
+  const classes = useStyles();
+  const [invoice, setInvoice] = useState();
+  let { id } = useParams();
+
+  const getInvoice = async () => {
+    // Make a GET request
+    let res = await Axios.get(`/api/invoices/${id}`);
+    let { data } = res;
+    setInvoice(data);
+  };
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    getInvoice();
+  }, []);
+
+  console.log("invoice: ",invoice)
+
+
+
+  if (!invoice) {
+    return <Loading />;
+  }
+  
   return (
     <React.Fragment>
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <LinkRouter to="/" className={classes.link}>&lt; Go back</LinkRouter>
           <Typography variant="h6" color="inherit" noWrap>
-            QBvoice - New Invoice
+            QBvoice - Edit Invoice 
           </Typography>
         </Toolbar>
       </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Create a new invoice
+            Edit invoice
           </Typography>
-          <InvoiceForm />
+          <InvoiceForm data={invoice} />
         </Paper>
       </main>
     </React.Fragment>
